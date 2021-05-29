@@ -24,7 +24,7 @@ def create_parser():
 
 def main():
     import time
-    import bo
+    import boto3
     from pgbackup import pgdump, storage
 
     args = create_parser().parse_args()
