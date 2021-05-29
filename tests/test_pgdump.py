@@ -14,3 +14,16 @@ def test_dump_calls_pg_dump(mocker):
     mocker.patch('subprocess.Popen')
     assert pgdump.dump(url)
     subprocess.Popen.assert_called_with(['pg_dump', url], stdout=subprocess.PIPE)
+
+def test_dump_file_name_without_timestamp():
+    """
+    pgdump.db_file_name returns the name of the database
+    """
+    assert pgdump.dump_file_name(url) == "db_one.sql"
+
+def test_dump_file_name_with_timestamp():
+    """
+    pgdump.db_file_name returns the name of the database
+    """
+    timestamp = "2017-12-03T13:14:10"
+    assert pgdump.dump_file_name(url, timestamp) == f"db_one-{timestamp}.sql"
